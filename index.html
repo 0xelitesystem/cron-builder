@@ -302,7 +302,7 @@ function update(){
     $("description-display").textContent=describe(parts);
     $("error-msg").style.display="none";
     const next=nextN(parts,5);
-    $("next-list").innerHTML=next.map((d,i)=>`<li><span class="idx">${i+1}.</span> <span>${escapeHtml(d.toLocaleString())}</span></li>`).join("")||'<li><span class="idx">—</span> <span>No upcoming firings within search horizon</span></li>';
+    $("next-list").innerHTML=next.map((d,i)=>`<li><span class="idx">${i+1}.</span> <span>${escapeHtml(d.toLocaleString())}</span></li>`).join("")||'<li><span class="idx">-</span> <span>No upcoming firings within search horizon</span></li>';
   }catch(e){
     $("description-display").textContent="Invalid expression";
     $("error-msg").style.display="block";
@@ -316,7 +316,7 @@ function update(){
 const presetsContainer=$("presets");
 PRESETS.forEach(([cron,label])=>{
   const b=document.createElement("button");
-  b.type="button";b.className="preset-btn";b.textContent=cron+" — "+label;
+  b.type="button";b.className="preset-btn";b.textContent=cron+", "+label;
   b.addEventListener("click",()=>{
     const[m,h,d,mo,dw]=cron.split(" ");
     $("f-min").value=m;$("f-hour").value=h;$("f-dom").value=d;$("f-month").value=mo;$("f-dow").value=dw;
