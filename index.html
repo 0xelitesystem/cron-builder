@@ -41,7 +41,7 @@ h1 .accent{color:var(--accent);font-family:var(--mono)}
 .fields{display:grid;grid-template-columns:repeat(5,1fr);gap:.625rem;margin-bottom:.5rem}
 @media(max-width:640px){.fields{grid-template-columns:repeat(2,1fr)}}
 .field-block{background:var(--surface-2);border:1px solid var(--rule);border-radius:3px;padding:.625rem .5rem}
-.field-label{font-family:var(--mono);font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.4rem;text-align:center}
+.field-label{display:block;font-family:var(--mono);font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.4rem;text-align:center}
 .field-input{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:.4rem .5rem;font:inherit;font-family:var(--mono);font-size:.9375rem;text-align:center}
 .field-input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
 .field-range{font-size:.6875rem;color:var(--ink-soft);text-align:center;margin-top:.3rem;font-family:var(--mono)}
@@ -128,27 +128,27 @@ footer a:hover{color:var(--accent)}
 <div class="panel-head"><span class="panel-num">02</span><h2 class="panel-title">Fields</h2></div>
 <div class="fields">
 <div class="field-block">
-<div class="field-label">Minute</div>
+<label class="field-label" for="f-min">Minute</label>
 <input type="text" class="field-input" id="f-min" value="*" autocomplete="off" spellcheck="false">
 <div class="field-range">0-59</div>
 </div>
 <div class="field-block">
-<div class="field-label">Hour</div>
+<label class="field-label" for="f-hour">Hour</label>
 <input type="text" class="field-input" id="f-hour" value="*" autocomplete="off" spellcheck="false">
 <div class="field-range">0-23</div>
 </div>
 <div class="field-block">
-<div class="field-label">Day of Month</div>
+<label class="field-label" for="f-dom">Day of Month</label>
 <input type="text" class="field-input" id="f-dom" value="*" autocomplete="off" spellcheck="false">
 <div class="field-range">1-31</div>
 </div>
 <div class="field-block">
-<div class="field-label">Month</div>
+<label class="field-label" for="f-month">Month</label>
 <input type="text" class="field-input" id="f-month" value="*" autocomplete="off" spellcheck="false">
 <div class="field-range">1-12</div>
 </div>
 <div class="field-block">
-<div class="field-label">Day of Week</div>
+<label class="field-label" for="f-dow">Day of Week</label>
 <input type="text" class="field-input" id="f-dow" value="*" autocomplete="off" spellcheck="false">
 <div class="field-range">0-6 (Sun-Sat)</div>
 </div>
@@ -383,11 +383,8 @@ update();
 (function () {
   var KEY = "theme";
   var btn = document.querySelector("#theme-toggle, #theme-btn, .theme-btn, .theme-toggle, [data-theme-toggle]");
-  function host() {
-    if (document.documentElement.hasAttribute("data-theme")) { return document.documentElement; }
-    if (document.body && document.body.hasAttribute("data-theme")) { return document.body; }
-    return document.documentElement;
-  }
+  // This page's own toggle switches <body> while <html> keeps a fixed brand theme, so remember <body>.
+  function host() { return document.body || document.documentElement; }
   function current() { return host().getAttribute("data-theme") || ""; }
   function setter() {
     if (typeof setTheme === "function") { return setTheme; }
