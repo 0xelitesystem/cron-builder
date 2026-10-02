@@ -4,11 +4,13 @@ Visual cron expression builder with human-readable description and the next 5 fi
 
 **Live demo:** https://0xelitesystem.github.io/cron-builder/
 
-## Why
+## Why this exists
 
 Cron syntax is one of those things you re-learn every time you need it. This tool keeps the syntax visible (good for learning) but adds a live description and a calendar of when it will actually fire (good for verifying).
 
-## Use it
+It is a single HTML file with no tracking and no network calls, and it is MIT licensed.
+
+## Use
 
 Open `index.html` in any browser, or visit the hosted demo at `https://0xelitesystem.github.io/cron-builder/` once Pages is enabled.
 
@@ -55,6 +57,23 @@ Combinations of these are supported.
 - Vanilla JS, no frameworks, no dependencies
 - Light and dark themes with OS preference detection
 - WCAG AA contrast on both themes
+
+## Privacy
+
+Everything runs in your browser. The page makes no network requests, loads no external scripts or fonts, and has no analytics or tracking. The expression you build never leaves your machine. The one thing the page saves is your light or dark theme choice, written to `localStorage` under the key `theme` when you press the theme toggle. Clearing site data removes it.
+
+## Run locally
+
+```
+git clone https://github.com/0xelitesystem/cron-builder
+cd cron-builder
+```
+
+Then open `index.html` in any modern browser, or serve the folder with `python -m http.server` and visit http://localhost:8000/.
+
+## Build
+
+No build step. The whole tool is one `index.html` file with inline CSS and JavaScript, and there is nothing to install or compile.
 
 ## More
 
